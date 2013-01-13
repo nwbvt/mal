@@ -1,13 +1,6 @@
 (ns ml-clj.nkk
-  (:use (incanter core)))
-
-(defn euclidean
-  "The distance between two points"
-  [a b]
-  (sqrt (loop [sum 0, as a, bs b]
-          (if (or (empty? as) (empty? bs)) sum
-            (recur ($= ((first as) - (first bs)) ** 2 + sum)
-                   (rest as) (rest bs))))))
+  (:use (incanter core)
+        (ml-clj utils)))
 
 (let [dist-func (fn [point] (fn [& other] (euclidean point other))),
       compute-dists (fn [from-point data features]
