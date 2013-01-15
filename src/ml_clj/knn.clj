@@ -1,4 +1,4 @@
-(ns ml-clj.nkk
+(ns ml-clj.knn
   (:use (incanter core)
         (ml-clj utils)))
 
