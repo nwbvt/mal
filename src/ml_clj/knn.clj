@@ -17,9 +17,10 @@
 (defn classify
   "use the knn classification algorithm to classify the new datum"
   [to-classify data features label k]
-  ($ 0 :type
-     ($order :votes :desc
-        ($rollup :count :votes :type
-           ($ (range k) [label :dist]
-              ($order :dist :asc
-                 (compute-dists to-classify data features)))))))
+  (->>
+    (compute-dists to-classify data features)
+    ($order :dist :asc)
+    ($ (range k) [label :dist])
+    ($rollup :count :votes :type)
+    ($order :votes :desc)
+    ($ 0 :type)))
