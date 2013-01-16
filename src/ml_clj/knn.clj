@@ -21,6 +21,6 @@
     (compute-dists to-classify data features)
     ($order :dist :asc)
     ($ (range k) [label :dist])
-    ($rollup :count :votes :type)
+    ($rollup :count :votes label)
     ($order :votes :desc)
-    ($ 0 :type)))
+    ($ 0 label)))

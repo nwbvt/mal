@@ -6,7 +6,7 @@
   [a b]
   (sqrt (loop [sum 0, as a, bs b]
           (if (or (empty? as) (empty? bs)) sum
-            (recur ($= ((first as) - (first bs)) ** 2 + sum)
+            (recur (double ($= (((first as) - (first bs)) ** 2) + sum))
                    (rest as) (rest bs))))))
 
 (let [normalize-field
