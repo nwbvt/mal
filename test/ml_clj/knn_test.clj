@@ -16,11 +16,16 @@
              (is (= :A 
                     (classify [1.1 1])
                     (classify [20 15])
+                    (classify [1.09 1] :k 1 :features [:two])
                     (classify [0.9 0] :k 1)))
              (is (= :B
                     (classify [0 0])
                     (classify [-5 1])
-                    (classify [1.09 1] :k 1)))))
+                    (classify [0.9 0] :k 1 :features [:two])
+                    (classify [1.09 1] :k 1)))
+             (is (= 1
+                    (classify [0.9] :features [:one] :label :two)
+                    (classify [0.9] :features [:two] :label :one)))))
   (testing "That it correctly classifies a more complex data set"
            (with-data (get-dataset :iris)
              (is (= "setosa"
