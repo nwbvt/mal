@@ -17,7 +17,12 @@
                     (classify [1.1 1])
                     (classify [20 15])
                     (classify [1.09 1] :k 1 :features [:two])
-                    (classify [0.9 0] :k 1)))
+                    (classify [0.9 0] :k 1)
+                    (classify [0 0] 
+                              :data (dataset [:one :two :type]
+                                             [[0 0 :A]
+                                              [0 0.1 :A]
+                                              [0.1 0 :A]]))))
              (is (= :B
                     (classify [0 0])
                     (classify [-5 1])
