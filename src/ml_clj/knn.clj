@@ -14,6 +14,16 @@
     (col-names (conj-cols data dist-col)
                (conj (col-names data) :dist))))
 
+(defn- get-rows
+  "get the rows
+   same as $ when requesting multiple rows, but when only one is requested,
+   it will still return a dataset"
+ [rows cols data]
+ (let [result ($ rows cols data)]
+  (if (seq? result)
+   (dataset cols [result])
+   result)))
+
 (defn classify
   "use the knn classification algorithm to classify the new datum"
   [to-classify & {:keys [label data features k]
@@ -25,7 +35,7 @@
       data
       (compute-dists to-classify use-features)
       ($order :dist :asc)
-      ($ (range k) [use-label :dist])
+      (get-rows (range k) [use-label :dist])
       ($rollup :count :votes use-label)
       ($order :votes :desc)
       ($ 0 use-label))))

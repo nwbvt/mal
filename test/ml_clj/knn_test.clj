@@ -8,15 +8,19 @@
   (testing "That it correctly classifies the simple data set"
            (with-data (dataset [:one :two :type]
                             [[1 1.1 :A]
+                             [1.1 1 :B]
                              [1 1 :A]
                              [0 0 :B]
+                             [0.1 0 :A]
                              [0 0.1 :B]])
              (is (= :A 
                     (classify [1.1 1])
-                    (classify [20 15])))
+                    (classify [20 15])
+                    (classify [0.9 0] :k 1)))
              (is (= :B
                     (classify [0 0])
-                    (classify [-5 1])))))
+                    (classify [-5 1])
+                    (classify [1.09 1] :k 1)))))
   (testing "That it correctly classifies a more complex data set"
            (with-data (get-dataset :iris)
              (is (= "setosa"
