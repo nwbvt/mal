@@ -1,13 +1,18 @@
 (ns mal.utils
   (:use incanter.core))
 
-(defn euclidean
-  "The distance between two points"
-  [a b]
-  (sqrt (loop [sum 0, as a, bs b]
-          (if (or (empty? as) (empty? bs)) sum
-            (recur (double ($= (((first as) - (first bs)) ** 2) + sum))
-                   (rest as) (rest bs))))))
+(let [distance
+      (memoize (fn
+                 [a b]
+                 (double ($= ((a - b) ** 2)))))]
+
+  (defn euclidean
+    "The distance between two points"
+    [a b]
+    (sqrt (loop [sum 0, as a, bs b]
+            (if (or (empty? as) (empty? bs)) sum
+              (recur (+ sum (distance (first as) (first bs)))
+                     (rest as) (rest bs)))))))
 
 (let [normalize-field
       (fn [field]
