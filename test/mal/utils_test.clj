@@ -1,7 +1,7 @@
-(ns ml-clj.utils-test
+(ns mal.utils-test
   (:use clojure.test
         incanter.core
-        ml-clj.utils))
+        mal.utils))
 
 (deftest test-euclidean
   (testing "That it returns the distance between two points"

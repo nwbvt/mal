@@ -1,4 +1,4 @@
-(ns ml-clj.utils
+(ns mal.utils
   (:use incanter.core))
 
 (defn euclidean

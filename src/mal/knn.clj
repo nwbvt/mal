@@ -1,6 +1,6 @@
-(ns ml-clj.knn
+(ns mal.knn
   (:use (incanter core)
-        (ml-clj utils)))
+        (mal utils)))
 
 (defn- dist-func
   "Create a distance function for the distance to a point"

@@ -1,8 +1,8 @@
-(ns ml-clj.knn-test
+(ns mal.knn-test
   (:use clojure.test
         incanter.core
         incanter.datasets
-        ml-clj.knn))
+        mal.knn))
 
 (deftest test-classify
   (testing "That it correctly classifies the simple data set"
