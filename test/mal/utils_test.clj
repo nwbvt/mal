@@ -38,3 +38,14 @@
                  d' (normalize d :same :different)]
              (is (v= [0 0.5 1 0.25] ($ :different' d')))
              (is (v= [0 0 0 0] ($ :same' d'))))))
+
+(defn round
+  "rounds f to the nth decimal place"
+  [f n]
+  (let [tens (Math/pow 10 n)]
+    (double (/ (int (* f tens)) tens))))
+
+(deftest test-entropy
+  (testing "That it computes the entropy of a set of data (copied from my book (because I'm lazy))"
+           (let [d [:yes :yes :no :no :no]]
+             (is (= 0.97095 (round (BigDecimal. (float (entropy d))) 5))))))
